@@ -1,0 +1,37 @@
+/**
+ * 苹方字体
+ * @description 根据蓝湖UI设计图内的文字样式提示，选择以下对应的字体。通常 题目、标题用PingFangSCMedium；普通文本用PingFangSCRegular(一般可以不写，因为body已经设置了此值，元素font-family默认继承body元素的)；
+ * @example 1. 在组件style标签内给元素设置字体：div { font-family: 'PingFangSCRegular, Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; }
+ *          2. 以下几个字体已经在Windi Css 中扩展，所以在template模中可这样使用：<div class="font-PingFangSCRegular">.....</div>
+            注意： 如果出现文字存在上下不居中，请查看行高属性line-height是否设置的值不对，可添加样式：line-height: initial;或者元素标签加上类名 leading-initial 进行解决 
+ */
+
+@font-face {
+  font-family: 'PingFangSCRegular, sans-serif';
+  src: url('./PingFangRegular.ttf');
+}
+
+@font-face {
+  font-family: 'PingFangSCMedium, sans-serif';
+  src: url('./PingFangMedium.ttf');
+}
+
+@font-face {
+  font-family: 'PingFangSCBold, sans-serif';
+  src: url('./PingFangBold.ttf');
+}
+
+@font-face {
+  font-family: 'PingFangSCExtraLight, sans-serif';
+  src: url('./PingFangExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'PingFangSCHeavy, sans-serif';
+  src: url('./PingFangHeavy.ttf');
+}
+
+@font-face {
+  font-family: 'PingFangSCLight, sans-serif';
+  src: url('./PingFangLight.ttf');
+}

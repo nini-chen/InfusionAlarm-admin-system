@@ -1,0 +1,79 @@
+@import './pagination.less';
+@import './input.less';
+@import './btn.less';
+@import './select.less';
+@import './modal.less';
+@import './form.less';
+// @import './table.less';
+
+// TODO beta.11 fix
+.ant-col {
+  width: 100%;
+}
+
+.ant-image-preview-root {
+  img {
+    display: unset;
+  }
+}
+
+span.anticon:not(.app-iconify) {
+  vertical-align: 0.125em !important;
+}
+
+.ant-back-top {
+  right: 20px;
+  bottom: 20px;
+}
+
+.collapse-container__body {
+  > .ant-descriptions {
+    margin-left: 6px;
+  }
+}
+
+.ant-image-preview-operations {
+  background-color: rgb(0 0 0 / 30%);
+}
+
+.ant-popover {
+  &-content {
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  }
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after,
+.ant-tree-checkbox-checked .ant-tree-checkbox-inner::after {
+  border-top: 0 !important;
+  border-left: 0 !important;
+}
+
+// DatePicker日期选择器 设置灰色背景色
+.public-picker-bg.ant-calendar-picker .ant-calendar-picker-input.ant-input {
+  background-color: #f7f8fc;
+}
+
+// menu组件文本样式
+.ant-dropdown-menu-title-content > a {
+  color: inherit;
+  transition: all 0.3s;
+  font-family: 'PingFangSCMedium, sans-serif';
+}
+
+.ant-table-column-title {
+  font-weight: 600;
+  font-family: 'PingFangSCMedium, sans-serif';
+}
+
+// .anticon-close {
+//   svg {
+//     // viewBox: 0 0 32 32;
+//     width: 2em;
+//     height: 2em;
+//     path {
+//       d: path(
+//         'm 17.714 16 l 5.943 -5.943 c 0.457 -0.457 0.457 -1.257 0 -1.714 c -0.457 -0.457 -1.257 -0.457 -1.714 0 L 16 14.286 l -5.943 -5.943 c -0.457 -0.457 -1.257 -0.457 -1.714 0 c -0.457 0.457 -0.457 1.257 0 1.714 L 14.286 16 l -5.943 5.943 c -0.457 0.457 -0.457 1.257 0 1.714 c 0.457 0.457 1.257 0.457 1.714 0 L 16 17.714 l 5.943 5.943 c 0.457 0.457 1.257 0.457 1.714 0 c 0.457 -0.457 0.457 -1.257 0 -1.714 L 17.714 16 Z'
+//       );
+//     }
+//   }
+// }

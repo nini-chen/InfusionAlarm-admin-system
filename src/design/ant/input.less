@@ -1,0 +1,49 @@
+/* stylelint-disable declaration-empty-line-before */
+/* stylelint-disable order/order */
+@import (reference) '../color.less';
+
+// input
+.ant-input {
+  &-number {
+    min-width: 110px;
+  }
+  font-family: 'PingFangSCMedium, sans-serif';
+}
+
+.ant-input-affix-wrapper .ant-input-suffix {
+  right: 9px;
+}
+
+.ant-input-clear-icon {
+  margin-right: 5px;
+}
+
+.ant-input-affix-wrapper-textarea-with-clear-btn {
+  padding: 0 !important;
+
+  textarea.ant-input {
+    padding: 4px;
+  }
+}
+
+// textarea框
+.ant-input-textarea {
+  position: relative;
+
+  &.ant-input-textarea-show-count::after {
+    position: absolute;
+    bottom: 23px;
+    right: 10px;
+    background-color: #fff;
+  }
+
+  .ant-input {
+    padding: 4px 24px 26px 4px !important;
+  }
+}
+
+// 搜索输入框
+.ant-input-search.ant-input-affix-wrapper,
+.ant-input-search > input {
+  background-color: #f7f8fc;
+}
