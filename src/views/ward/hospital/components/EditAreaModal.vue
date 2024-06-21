@@ -9,7 +9,11 @@
       :body-style="bodyStyle"
     >
       <div class="p-30px pl-0 w-full">
-        <BasicForm @register="register" />
+        <BasicForm @register="register">
+          <template #uploadItem="{ model, field }">
+            <UploadImg v-model:value="model[field]" />
+          </template>
+        </BasicForm>
       </div>
     </BasicModal>
   </div>
@@ -20,13 +24,14 @@
   import { BasicForm, useForm, FormSchema } from '/@/components/Form/index';
   import { setFacilityNameApi } from '/@/api/ward/facility.ts';
   import { verificationNull } from '/@/views/ward/wardRules';
+  import UploadImg from './UploadImg.vue';
 
   const emit = defineEmits(['success', 'register']);
   const modalFormSchemas: FormSchema[] = [
     {
       field: 'name',
       component: 'Input',
-      label: '院区名称',
+      label: '单位名称',
       colProps: {
         span: 24,
       },
@@ -37,10 +42,16 @@
       },
       dynamicRules: verificationNull,
     },
+    {
+      field: 'staff_avatar',
+      component: 'Input',
+      label: '单位logo',
+      slot: 'uploadItem',
+    },
   ];
 
   const bodyStyle = {
-    height: '154px',
+    height: '230px',
   };
 
   const [register, { getFieldsValue, setFieldsValue, resetFields, validate }] = useForm({
@@ -52,9 +63,8 @@
   });
 
   const [registerModal, { setModalProps, closeModal }] = useModalInner((data) => {
-    console.log('编辑院区信息----', data);
     setFieldsValue({ name: data.name });
-    setModalProps({ title: '编辑院区信息' });
+    setModalProps({ title: '编辑单位信息' });
   });
 
   async function handleSubmit() {

@@ -2,8 +2,10 @@
   <PageWrapper>
     <!-- 院区信息-->
     <AreaInformation />
-    <!-- 院区管理 -->
-    <AreaManagement />
+    <!-- 智能输液报警器分区列表 -->
+    <AreaManagement title="智能输液报警器分区列表" />
+    <!-- 无线报警器分区列表 -->
+    <AreaManagement title="无线报警器分区列表" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>

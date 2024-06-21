@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <div class="flex w-full justify-between items-center mb-2">
-      <div class="text-base font-medium"> 病区列表 </div>
+      <div class="text-base font-medium"> {{ title }} </div>
       <div>
         <Button type="primary" @click="refresh">
           <template #icon><SyncOutlined /></template>
@@ -9,7 +9,7 @@
         </Button>
         <Button type="primary" class="ml-4" @click="handleAddArea">
           <template #icon><PlusOutlined /></template>
-          添加病区
+          添加分区
         </Button>
       </div>
     </div>
@@ -18,19 +18,19 @@
       <template #action="{ record }">
         <TableAction
           :actions="[
-            {
-              label: '详情',
-              onClick: handleDetail.bind(null, record),
-            },
+            // {
+            //   label: '详情',
+            //   onClick: handleDetail.bind(null, record),
+            // },
             {
               label: '编辑',
               onClick: handleEditArea.bind(null, record),
             },
-            {
-              label: '管理',
-              onClick: handleManage.bind(null, record),
-              ifShow: record.is_icu != 1,
-            },
+            // {
+            //   label: '管理',
+            //   onClick: handleManage.bind(null, record),
+            //   ifShow: record.is_icu != 1,
+            // },
             {
               label: '删除',
               onClick: handleDelete.bind(null, record),
@@ -41,14 +41,21 @@
       </template>
     </BasicTable>
 
-    <!-- 添加病区 / 编辑病区 -->
+    <!-- 添加分区 / 编辑分区 -->
     <ManageAreaModal :width="620" @register="registerManageAreaModal" @success="refresh" />
 
     <!-- 病区详情 -->
-    <AreaDetailModal :width="620" :canFullscreen="false" @register="detailModal" />
+    <!-- <AreaDetailModal :width="620" :canFullscreen="false" @register="detailModal" /> -->
 
     <!-- 删除病区 -->
-    <Modal v-model:visible="deleteVisible" centered width="446" title="删除" okText="确认" @ok="confirmDelete">
+    <Modal
+      v-model:visible="deleteVisible"
+      centered
+      width="446"
+      title="删除"
+      okText="确认"
+      @ok="confirmDelete"
+    >
       <div class="px-24px py-30px">
         <div class="flex justify-center items-center">
           <Icon icon="ant-design:exclamation-circle-filled" color="#FF4F4F" size="23" />
@@ -73,11 +80,14 @@
   import { useModal } from '/@/components/Modal';
   import { useUserStore } from '/@/store/modules/user';
   import { useGo } from '/@/hooks/web/usePage';
-  import AreaDetailModal from './AreaDetailModal.vue';
+  // import AreaDetailModal from './AreaDetailModal.vue';
 
   const go = useGo();
   const userStore = useUserStore();
   const { createMessage } = useMessage();
+  const props = defineProps({
+    title: { type: String },
+  });
 
   // 当前操作的院区
   const currentRecord = ref<any>({});
@@ -87,7 +97,7 @@
   //  新增或编辑病区
   const [registerManageAreaModal, { openModal: openAreaManagementModal }] = useModal();
 
-  const [detailModal, { openModal: openDetailModal }] = useModal();
+  // const [detailModal, { openModal: openDetailModal }] = useModal();
   // 注册表格组件
   const [registerTable, { reload, scrollTo }] = useTable({
     columns: listColumns,
@@ -122,12 +132,12 @@
     reload();
   }
 
-  // 病区列表-操作：详情 按钮
-  function handleDetail(record) {
-    openDetailModal(true, {
-      record,
-    });
-  }
+  // // 病区列表-操作：详情 按钮
+  // function handleDetail(record) {
+  //   openDetailModal(true, {
+  //     record,
+  //   });
+  // }
 
   // 病区列表-操作：新增 按钮
   function handleAddArea() {
@@ -144,11 +154,11 @@
     });
   }
 
-  // 病区列表-操作：管理 按钮
-  function handleManage(record) {
-    userStore.setCurrentPartition(record);
-    go('/ward/inpatient');
-  }
+  // // 病区列表-操作：管理 按钮
+  // function handleManage(record) {
+  //   userStore.setCurrentPartition(record);
+  //   go('/ward/inpatient');
+  // }
 
   // 确定删除
   async function confirmDelete() {

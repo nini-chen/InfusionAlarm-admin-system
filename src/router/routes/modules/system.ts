@@ -16,14 +16,6 @@ const system: AppRouteModule = {
   },
   children: [
     {
-      path: 'interaction',
-      name: 'SystemInteraction',
-      component: () => import('/@/views/system/interaction/index.vue'),
-      meta: {
-        title: t('routes.system.interaction.interactionSettings'),
-      },
-    },
-    {
       path: 'user',
       name: 'DoctorsUser',
       component: () => import('/@/views/doctors/user/index.vue'),

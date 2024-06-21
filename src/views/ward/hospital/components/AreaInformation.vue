@@ -15,11 +15,11 @@
     </div>
     <div class="content w-full bg-white rounded-md mt-4">
       <div class="top p-4">
-        <div class="flex w-full py-8px font-color">
+        <!-- <div class="flex w-full py-8px font-color">
           <span>院区名称：</span>
           <span class="text-black">{{ msgInfo.hospital_name }}</span>
-        </div>
-        <div class="flex w-full font-color">
+        </div> -->
+        <!-- <div class="flex w-full font-color">
           <div class="w-1/3 py-8px">
             <span>病区数量：</span>
             <span class="text-black">{{ msgInfo.partition_num }}</span>
@@ -28,14 +28,18 @@
             <span>病房数量：</span>
             <span class="text-black">{{ msgInfo.hospital_room_num }}</span>
           </div>
-        </div>
+        </div> -->
         <div class="flex w-full font-color border-bottom pb-4">
           <div class="w-1/3 py-8px">
-            <span>医护主机数量：</span>
+            <span>单位名称：</span>
+            <span class="text-black">{{ msgInfo.hospital_name }}</span>
+          </div>
+          <div class="w-1/3 py-8px">
+            <span>单位logo：</span>
             <span class="text-black">{{ msgInfo.medical_host_num }}</span>
           </div>
           <div class="w-1/3 py-8px">
-            <span>终端数量：</span>
+            <span>设备数量：</span>
             <span class="text-black">{{ msgInfo.device_num }}</span>
           </div>
         </div>
@@ -66,22 +70,16 @@
             >
           </div>
         </div>
-        <!-- <div class="flex w-full font-color">
+        <div class="flex w-full font-color">
           <div class="w-2/4 py-8px">
             <span>主机型号：</span>
-            <span class="text-black">{{ msgInfo.host_model }}</span>
+            <span class="text-black">{{ msgInfo.host_address }}</span>
           </div>
-        </div> -->
+        </div>
         <div class="flex w-full font-color">
           <div class="w-2/4 py-8px">
             <span>设备地址：</span>
             <span class="text-black">{{ msgInfo.host_address }}</span>
-          </div>
-          <div v-if="isShowVisitPower" class="w-2/4 py-8px">
-            <span>云探视配置：</span>
-            <span @click="setVisitInfoModal(true)" class="text-blue-400 text-[#4879FB]">{{
-              visitInfo.cloud_host ?? '编辑'
-            }}</span>
           </div>
         </div>
         <div class="flex w-full font-color">
@@ -98,7 +96,6 @@
         </div>
       </div>
     </div>
-    <VisitInfoModal :width="620" @register="visitInfoModal" @success="handleVisitSuccess" />
     <EditAreaModal :width="600" @register="registerEditAreaModal" @success="handleSuccess" />
   </div>
 </template>
@@ -107,14 +104,12 @@
   import { Button, Progress } from 'ant-design-vue';
   import { SyncOutlined, EditOutlined } from '@ant-design/icons-vue';
   import EditAreaModal from './EditAreaModal.vue';
-  import VisitInfoModal from './VisitInfoModal.vue';
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
   const { createMessage } = useMessage();
-  import { getFacilityInfoApi, getVisitInfoApi, getIsVisitPowerApi } from '/@/api/ward/facility.ts';
+  import { getFacilityInfoApi } from '/@/api/ward/facility.ts';
 
   const [registerEditAreaModal, { openModal: openEditAreaModal }] = useModal();
-  const [visitInfoModal, { openModal: openVisitModal }] = useModal();
   let msgInfo = ref({
     hospital_name: '--',
     partition_num: 0,
@@ -129,9 +124,7 @@
     uuid: '--',
     memory_used: '--',
   });
-  const visitInfo = ref({});
   const proportion = ref(0);
-  const isShowVisitPower = ref(false);
   getInfo();
 
   async function getInfo() {
@@ -148,32 +141,10 @@
   function handleSuccess() {
     getInfo();
   }
-  getIsVisitPower();
-
-  async function getIsVisitPower() {
-    const res: any = await getIsVisitPowerApi();
-    isShowVisitPower.value = res.is_show;
-    if (res.is_show) getVisitInfo();
-  }
-
-  async function getVisitInfo() {
-    const res: any = await getVisitInfoApi();
-    if (res.result == 200) {
-      visitInfo.value = res.data;
-    } else if (res.result !== 200 && res.return_message != '项目配置的域名有误，请重新配置') {
-      createMessage.error(res.return_message);
-    }
-  }
-  function handleVisitSuccess() {
-    getVisitInfo();
-  }
   function editInfo() {
     openEditAreaModal(true, {
       name: msgInfo.value.hospital_name,
     });
-  }
-  function setVisitInfoModal() {
-    openVisitModal(true, visitInfo.value);
   }
 
   function rushInfo() {
