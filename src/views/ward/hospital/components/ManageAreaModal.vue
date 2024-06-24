@@ -21,40 +21,10 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm, FormSchema } from '/@/components/Form/index';
   import { addFacilityApi, editFacilityApi } from '/@/api/ward/facility';
-  import {
-    verificationWardCode,
-    verificationWardName,
-    verificationAreaCode,
-  } from '/@/views/ward/wardRules';
+  import { verificationWardCode, verificationWardName } from '/@/views/ward/wardRules';
 
   const { createMessage } = useMessage();
   const emit = defineEmits(['success', 'register']);
-
-  const areaOrderOptions = [
-    {
-      label: '房内顺序',
-      value: 1,
-    },
-    {
-      label: '区内顺序',
-      value: 2,
-    },
-  ];
-
-  // 1-60分钟，select框option属性配置
-  // const secondsOptions = Array.from({ length: 60 }, (_, i) => {
-  //   return {
-  //     value: i + 1,
-  //     label: i + 1,
-  //   };
-  // });
-
-  // 表单选项，判断是否勾选了icu
-  const ICUVisible = ({ values }) => values.is_icu === 1;
-
-  // 温馨提醒选项文本框的默认提示文字
-  const tipsPlaceholder =
-    '请输入温馨提示如：\n1、每日可探视时间为15:00-17:00；\n2、探视过程中，请引导患者积极向上、乐观、豁达的生活态度；';
 
   const modalFormSchemas: FormSchema[] = [
     {
@@ -64,7 +34,7 @@
       required: true,
       componentProps: {
         placeholder: '请输入分区名称',
-        maxlength: 20,
+        maxlength: 10,
       },
       dynamicRules: verificationWardName,
     },
@@ -75,9 +45,133 @@
       required: true,
       componentProps: {
         placeholder: '请输入分区编号',
-        maxlength: 10,
+        maxlength: 20,
       },
       dynamicRules: verificationWardCode,
+    },
+    {
+      field: 'ip',
+      component: 'Input',
+      label: '1号接收器IP',
+      required: true,
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+      dynamicRules: verificationWardCode,
+    },
+    {
+      field: 'duanko',
+      component: 'Input',
+      label: '1号接收器端口',
+      required: true,
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+      dynamicRules: verificationWardCode,
+    },
+    {
+      field: 'ip2',
+      component: 'Input',
+      label: '2号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko2',
+      component: 'Input',
+      label: '2号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip3',
+      component: 'Input',
+      label: '3号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko3',
+      component: 'Input',
+      label: '3号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip4',
+      component: 'Input',
+      label: '4号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko4',
+      component: 'Input',
+      label: '4号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip5',
+      component: 'Input',
+      label: '5号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko5',
+      component: 'Input',
+      label: '5号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
     },
   ];
 
@@ -111,23 +205,7 @@
     // 部分选项，在编辑的时候，是禁止的
     updateSchema([
       {
-        field: 'area_code',
-        dynamicDisabled: isEdit,
-      },
-      {
-        field: 'partition_order',
-        dynamicDisabled: isEdit,
-      },
-      {
-        field: 'is_icu',
-        dynamicDisabled: isEdit,
-      },
-      {
-        field: 'checkedSwitch',
-        dynamicDisabled: isEdit,
-      },
-      {
-        field: 'partition_avoidnum',
+        field: 'partition_code',
         dynamicDisabled: isEdit,
       },
     ]);

@@ -68,10 +68,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, createVNode } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
   import { Icon } from '/@/components/Icon';
-  import { SyncOutlined, PlusOutlined } from '@ant-design/icons-vue';
+  import { SyncOutlined, PlusOutlined, ExclamationCircleFilled } from '@ant-design/icons-vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { listColumns } from '../data.ts';
   import { getFacilityListApi, deleteFacilityApi } from '/@/api/ward/facility.ts';
@@ -173,13 +173,38 @@
   }
 
   function handleDelete(record) {
-    if (record.device_num > 0) {
-      createMessage.destroy();
-      createMessage.warning('病区中仍有设备绑定，请先移除所有绑定设备');
-      return;
+    // if (record.device_num > 0) {
+    //   createMessage.destroy();
+    //   createMessage.warning('病区中仍有设备绑定，请先移除所有绑定设备');
+    //   return;
+    // }
+    // currentRecord.value = record;
+    // deleteVisible.value = true;
+    Modal.confirm({
+      class: 'custom-modal-confirm',
+      title: '删除',
+      content: `确认删除 ${record.area_name} 分区？ 删除后，该分区所有设备信息将会丢失`,
+      okText: '确认',
+      centered: true,
+      maskClosable: true,
+      closable: true,
+      icon: () => createVNode(ExclamationCircleFilled, { style: 'color:#FF4F4F;' }),
+      onOk() {
+        confirmDeleteDevice(record.id);
+      },
+    });
+    // 操作-删除-确定删除分区
+    async function confirmDeleteDevice(deviceId) {
+      console.log('确定删除分区');
+      // const params = {
+      //   id: deviceId,
+      // };
+      // const res = await deleteDeviceByIdApi(params);
+      // if (res) {
+      //   createMessage.success('操作成功');
+      //   handleRefresh();
+      // }
     }
-    currentRecord.value = record;
-    deleteVisible.value = true;
   }
 
   // 将获取到的病区数据更新到缓存

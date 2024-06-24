@@ -5,7 +5,7 @@
     <!-- 智能输液报警器分区列表 -->
     <AreaManagement title="智能输液报警器分区列表" />
     <!-- 无线报警器分区列表 -->
-    <AreaManagement title="无线报警器分区列表" />
+    <!-- <AreaManagement title="无线报警器分区列表" /> -->
   </PageWrapper>
 </template>
 <script lang="ts" setup>
