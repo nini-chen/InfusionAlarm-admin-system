@@ -1,6 +1,6 @@
 ## 简介
 
-项目名称: 医护对讲后台管理系统V2.0
+项目名称: 智能输液后台管理系统V2.0
 
 1. [gitlab地址](http://172.16.200.42/MedicalSystem/MedicalIntercomSystem_PCWeb_Vue) [项目下载地址](git@172.16.200.42:MedicalSystem/MedicalIntercomSystem_PCWeb_Vue.git)
 

@@ -9,7 +9,7 @@
     v-model:value="partitionId"
     :options="partitionOptions"
     @change="selectPartition"
-    placeholder="请选择病区"
+    placeholder="请选择分区"
   />
 </template>
 <script lang="ts" setup>
