@@ -1,4 +1,4 @@
-// 医院管理-设备管理模块
+// 架构管理-设备管理模块
 
 import { defHttp } from '/@/utils/http/axios';
 import {

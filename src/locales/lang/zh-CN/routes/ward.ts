@@ -1,8 +1,8 @@
 export default {
-  ward: '医院管理',
+  ward: '架构管理',
   hospital: {
-    hospitalArea: '院区管理',
-    addArea: '添加病区',
+    hospitalArea: '分区管理',
+    addArea: '添加分区',
   },
   device: {
     wardAndDevice: '设备管理',

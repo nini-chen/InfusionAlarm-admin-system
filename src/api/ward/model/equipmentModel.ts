@@ -1,6 +1,6 @@
 import { BasicFetchResult } from '/@/api/model/baseModel';
 
-// 医院管理-设备管理模块 接口声明
+// 架构管理-设备管理模块 接口声明
 export interface DeviceListSearchParams {
   page_index: number | string;
   page_size: number | string;

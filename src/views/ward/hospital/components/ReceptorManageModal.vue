@@ -10,7 +10,13 @@
     >
       <div class="w-full pb-4">
         <!-- <div class="text-base font-medium pt-0 pb-1">分区基础信息</div> -->
-        <BasicForm class="manage-ward-area" @register="register" />
+        <BasicForm class="manage-ward-area" @register="register">
+          <template #areaName="{ model, field }">
+            <div class="flex items-center">
+              {{ model[field] }}
+            </div>
+          </template>
+        </BasicForm>
       </div>
     </BasicModal>
   </div>
@@ -21,7 +27,7 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm, FormSchema } from '/@/components/Form/index';
   import { addFacilityApi, editFacilityApi } from '/@/api/ward/facility';
-  import { verificationWardCode, verificationWardName } from '/@/views/ward/wardRules';
+  import { verificationWardCode } from '/@/views/ward/wardRules';
 
   const { createMessage } = useMessage();
   const emit = defineEmits(['success', 'register']);
@@ -29,86 +35,133 @@
   const modalFormSchemas: FormSchema[] = [
     {
       field: 'partition_name',
+      slot: 'areaName',
       component: 'Input',
       label: '分区名称',
-      required: true,
-      componentProps: {
-        placeholder: '请输入分区名称',
-        maxlength: 10,
-      },
-      dynamicRules: verificationWardName,
     },
     {
-      field: 'partition_code',
+      field: 'ip',
       component: 'Input',
-      label: '分区编号',
+      label: '1号接收器IP',
       required: true,
       componentProps: {
-        placeholder: '请输入分区编号',
-        maxlength: 20,
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
       },
       dynamicRules: verificationWardCode,
     },
     {
-      field: 'partition_sudu',
-      component: 'Select',
-      label: '切页速度',
+      field: 'duanko',
+      component: 'Input',
+      label: '1号接收器端口',
       required: true,
       componentProps: {
-        options: [
-          {
-            label: '5s',
-            value: '5s',
-            key: '5s',
-          },
-          {
-            label: '8s',
-            value: '8s',
-            key: '8s',
-          },
-          {
-            label: '10s',
-            value: '10s',
-            key: '10s',
-          },
-          {
-            label: '12s',
-            value: '12s',
-            key: '12s',
-          },
-          {
-            label: '15s',
-            value: '15s',
-            key: '15s',
-          },
-          {
-            label: '20s',
-            value: '20s',
-            key: '20s',
-          },
-          {
-            label: '30s',
-            value: '30s',
-            key: '30s',
-          },
-          {
-            label: '45s',
-            value: '45s',
-            key: '45s',
-          },
-          {
-            label: '50s',
-            value: '50s',
-            key: '50s',
-          },
-          {
-            label: '60s',
-            value: '60s',
-            key: '60s',
-          },
-        ],
+        placeholder: '请输入端口',
+        maxlength: 4,
       },
-      suffix: '状态展示页面切页速度',
+      colProps: {
+        span: 12,
+      },
+      dynamicRules: verificationWardCode,
+    },
+    {
+      field: 'ip2',
+      component: 'Input',
+      label: '2号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko2',
+      component: 'Input',
+      label: '2号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip3',
+      component: 'Input',
+      label: '3号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko3',
+      component: 'Input',
+      label: '3号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip4',
+      component: 'Input',
+      label: '4号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko4',
+      component: 'Input',
+      label: '4号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'ip5',
+      component: 'Input',
+      label: '5号接收器IP',
+      componentProps: {
+        placeholder: '请输入接收器IP',
+        maxlength: 15,
+      },
+      colProps: {
+        span: 12,
+      },
+    },
+    {
+      field: 'duanko5',
+      component: 'Input',
+      label: '5号接收器端口',
+      componentProps: {
+        placeholder: '请输入端口',
+        maxlength: 4,
+      },
+      colProps: {
+        span: 12,
+      },
     },
   ];
 
@@ -126,7 +179,7 @@
 
   const [registerModal, { setModalProps, closeModal }] = useModalInner((data) => {
     const { isEdit, record } = data;
-    const title = isEdit ? '编辑分区' : '添加分区';
+    const title = '管理分区';
     setModalProps({
       title,
     });

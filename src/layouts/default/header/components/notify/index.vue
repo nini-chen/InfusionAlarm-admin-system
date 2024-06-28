@@ -34,7 +34,7 @@
 
   // 跳去离线设备页面
   function onNoticeClick() {
-    // 判断用户是否有权限, 有则跳去医院管理-设备管理-离线设备列表tab（tabActive: 3）; 否则跳去403无权限页面
+    // 判断用户是否有权限, 有则跳去架构管理-设备管理-离线设备列表tab（tabActive: 3）; 否则跳去403无权限页面
     const query = permissionStore.getPermCodeList?.includes('WardDevice')
       ? {
           tabActive: 3,

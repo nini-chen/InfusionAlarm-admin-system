@@ -26,11 +26,10 @@
               label: '编辑',
               onClick: handleEditArea.bind(null, record),
             },
-            // {
-            //   label: '管理',
-            //   onClick: handleManage.bind(null, record),
-            //   ifShow: record.is_icu != 1,
-            // },
+            {
+              label: '管理',
+              onClick: handleManage.bind(null, record),
+            },
             {
               label: '删除',
               onClick: handleDelete.bind(null, record),
@@ -43,6 +42,8 @@
 
     <!-- 添加分区 / 编辑分区 -->
     <ManageAreaModal :width="620" @register="registerManageAreaModal" @success="refresh" />
+    <!-- 分区管理--接收器 -->
+    <ReceptorManageModal :width="620" @register="receptorManageModal" @success="refresh" />
 
     <!-- 病区详情 -->
     <!-- <AreaDetailModal :width="620" :canFullscreen="false" @register="detailModal" /> -->
@@ -77,17 +78,13 @@
   import { getFacilityListApi, deleteFacilityApi } from '/@/api/ward/facility.ts';
   import { useMessage } from '/@/hooks/web/useMessage';
   import ManageAreaModal from './ManageAreaModal.vue';
+  import ReceptorManageModal from './ReceptorManageModal.vue';
   import { useModal } from '/@/components/Modal';
   import { useUserStore } from '/@/store/modules/user';
-  import { useGo } from '/@/hooks/web/usePage';
   // import AreaDetailModal from './AreaDetailModal.vue';
 
-  const go = useGo();
   const userStore = useUserStore();
   const { createMessage } = useMessage();
-  const props = defineProps({
-    title: { type: String },
-  });
 
   // 当前操作的院区
   const currentRecord = ref<any>({});
@@ -96,6 +93,8 @@
 
   //  新增或编辑病区
   const [registerManageAreaModal, { openModal: openAreaManagementModal }] = useModal();
+  // 分区管理--接收器
+  const [receptorManageModal, { openModal: openReceptorManageModal }] = useModal();
 
   // const [detailModal, { openModal: openDetailModal }] = useModal();
   // 注册表格组件
@@ -154,11 +153,15 @@
     });
   }
 
-  // // 病区列表-操作：管理 按钮
-  // function handleManage(record) {
-  //   userStore.setCurrentPartition(record);
-  //   go('/ward/inpatient');
-  // }
+  // 分区列表-操作：管理 按钮
+  function handleManage(record) {
+    console.log('操作：管理--', record);
+    openReceptorManageModal(true, {
+      record,
+      isEdit: true,
+    });
+    // userStore.setCurrentPartition(record);
+  }
 
   // 确定删除
   async function confirmDelete() {
@@ -195,7 +198,7 @@
     });
     // 操作-删除-确定删除分区
     async function confirmDeleteDevice(deviceId) {
-      console.log('确定删除分区');
+      console.log('确定删除分区', deviceId);
       // const params = {
       //   id: deviceId,
       // };
